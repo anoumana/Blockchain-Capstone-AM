@@ -9,7 +9,7 @@ import "./Oraclize.sol";
 contract Ownable {
     //  TODO's
     //  1) create a private '_owner' variable of type address with a public getter function
-    private address _owner;
+    address private _owner;
     //  2) create an internal constructor that sets the _owner var to the creater of the contract 
     constructor () public {
         _owner = msg.sender;
@@ -17,14 +17,15 @@ contract Ownable {
     //  3) create an 'onlyOwner' modifier that throws if called by any account other than the owner.
     modifier onlyOwner(){
         require(msg.sender == _owner, "Not Authorized");
+        _;
     }
 
     modifier requireValidAddress(address _address){
-        require(_address != 0, "Not a valid address");
+        require(_address != address(0), "Not a valid address");
         _;
     }
     //  4) fill out the transferOwnership function
-    function transferOwnership(address newOwner) public requireValidAddress onlyOwner {
+    function transferOwnership(address newOwner) public requireValidAddress(newOwner) onlyOwner {
         // TODO add functionality to transfer control of the contract to a newOwner.
         // make sure the new owner is a real address
         address oldOwner = _owner;
@@ -33,7 +34,7 @@ contract Ownable {
     }
 
     //  5) create an event that emits anytime ownerShip is transfered (including in the constructor)
-    emit OwnershipTransfered(address indexed oldOwner, address indexed newOwner);
+    event OwnershipTransfered(address indexed oldOwner, address indexed newOwner);
 }
 
 //  TODO's: Create a Pausable contract that inherits from the Ownable contract
@@ -64,14 +65,14 @@ contract Pausable is Ownable {
         emit Paused(msg.sender);
     }
 
-    function unPause() public onlyOwner whenPaused {
+    function unPause() public onlyOwner paused {
         _paused = false;
         emit UnPaused(msg.sender);
     }
 
     //  5) create a Paused & Unpaused event that emits the address that triggered the event
     event Paused(address sender);
-    event Unpaused(address sender);
+    event UnPaused(address sender);
 }
 
 contract ERC165 {
@@ -166,7 +167,7 @@ contract ERC721 is Pausable, ERC165 {
         require(to != ownerOf(tokenId), "Given address cannot be the owner of the given Token ID");
 
         // TODO require the msg sender to be the owner of the contract or isApprovedForAll() to be true
-        require(msg.sender == _owner || isApprovedForAll(msg.sener, to, "msg sender should be the owner of the contract or isApprovedForAll() should be true");
+        require((msg.sender == _tokenOwner[tokenId] )|| (isApprovedForAll(msg.sender, to)), "msg sender should be the owner of the contract or isApprovedForAll should be true");
 
         // TODO add 'to' address to token approvals
         _tokenApprovals[tokenId] = to;
@@ -478,10 +479,14 @@ contract ERC721Enumerable is ERC165, ERC721 {
 }
 
 contract ERC721Metadata is ERC721Enumerable, usingOraclize {
-    
-    // TODO: Create private vars for token _name, _symbol, and _baseTokenURI (string)
 
-    // TODO: create private mapping of tokenId's to token uri's called '_tokenURIs'
+    // TODO: Create private vars for token _name, _symbol, and _baseTokenURI (string)
+    string private _name;
+    string private _symbol;
+    string private _baseTokenURI;
+
+    //TODO: create private mapping of tokenId's to token uri's called '_tokenURIs'
+    mapping (uint256 => string) _tokenURIs;
 
     bytes4 private constant _INTERFACE_ID_ERC721_METADATA = 0x5b5e139f;
     /*
@@ -501,6 +506,7 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
         _registerInterface(_INTERFACE_ID_ERC721_METADATA);
     }
 
+
     // TODO: create external getter functions for name, symbol, and baseTokenURI
 
     function tokenURI(uint256 tokenId) external view returns (string memory) {
@@ -519,10 +525,10 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
         // TIP #2: you can also use uint2str() to convert a uint to a string
             // see https://github.com/oraclize/ethereum-api/blob/master/oraclizeAPI_0.5.sol for strConcat()
 
-        string tokenIdString = uint2str(tokenId);
-        string tokenURI = strConcat(_baseTokenURI, tokenIdString);
-        _tokenURIs[tokenId] = tokenURI;
-        return tokenURI;
+        string memory tokenIdString = uint2str(tokenId);
+        string memory tokenURIString = strConcat(_baseTokenURI, tokenIdString);
+        _tokenURIs[tokenId] = tokenURIString;
+        return tokenURIString;
     }
 
 
@@ -537,7 +543,7 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 //      -returns a true boolean upon completion of the function
 //      -calls the superclass mint and setTokenURI functions
 
-contract AMPanam is ERC721Metadata("Panam", "PNM", "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/") {
+contract AMKaasu is ERC721Metadata("Kaasu", "KSU", "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/") {
     address private _contractOwner;
 
     constructor () public   {
