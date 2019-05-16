@@ -10,9 +10,15 @@ contract Ownable {
     //  TODO's
     //  1) create a private '_owner' variable of type address with a public getter function
     address private _owner;
+
+    function getOwner() public view returns (address) {
+        return _owner;
+    }
+
     //  2) create an internal constructor that sets the _owner var to the creater of the contract 
     constructor () public {
         _owner = msg.sender;
+        emit OwnershipTransfered(address(0), _owner);
     }    
     //  3) create an 'onlyOwner' modifier that throws if called by any account other than the owner.
     modifier onlyOwner(){
@@ -250,7 +256,7 @@ contract ERC721 is Pausable, ERC165 {
   
         // TODO mint tokenId to given address & increase token count of owner
         _tokenOwner[tokenId] = to;
-        _ownedTokensCount[to].increment;
+        _ownedTokensCount[to].increment();
 
         // TODO emit Transfer event
         emit Transfer(msg.sender, to, tokenId);
@@ -267,15 +273,14 @@ contract ERC721 is Pausable, ERC165 {
         require(to != address(0), "Cannot transfer to invalid address");
 
         // TODO: clear approval
-        _isApprovedOrOwner(from, tokenId);
-
+        _tokenApprovals[tokenId] = address(0);
         // TODO: update token counts & transfer ownership of the token ID 
         _tokenOwner[tokenId] = to;
-        _ownedTokensCount[from].decrement();
         _ownedTokensCount[to].increment();
+        _ownedTokensCount[from].decrement();
 
-        // TODO: emit correct event
-        emit Transfer(from, to, tokenId);
+        // // TODO: emit correct event
+        // emit Transfer(from, to, tokenId);
     }
 
     /**
