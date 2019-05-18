@@ -72,7 +72,7 @@ async function main() {
 
         // Creatures issued directly to the owner.
         for (var i = 0; i < NUM_CREATURES; i++) {
-            const result = await nftContract.methods.mint(OWNER_ADDRESS, i).send({ from: OWNER_ADDRESS });
+            const result = await nftContract.methods.mint(OWNER_ADDRESS, TOKEN_ID+i).send({ from: OWNER_ADDRESS });
             console.log("Minted creature. Transaction: " + result.transactionHash)
         }
     } 
