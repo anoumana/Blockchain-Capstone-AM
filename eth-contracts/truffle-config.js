@@ -18,11 +18,17 @@
  *
  */
 
-const HDWalletProvider = require('truffle-hdwallet-provider');
-const infuraKey = "fj4jll3k.....";
+// const HDWalletProvider = require('truffle-hdwallet-provider');
+// const infuraKey = "9a0a8568265140179c7aa9d49458592b";
 
-const fs = require('fs');
-const mnemonic = fs.readFileSync(".secret").toString().trim();
+// const fs = require('fs');
+// //const mnemonic = fs.readFileSync(".secret").toString().trim();
+// const mnemonic = "income just length prefer leisure fly speed obtain sting shift paper panic";
+
+var HDWalletProvider = require("truffle-hdwallet-provider");
+//var mnemonic = "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat";
+const infuraKey = "9a0a8568265140179c7aa9d49458592b";
+const mnemonic = "income just length prefer leisure fly speed obtain sting shift paper panic";
 
 module.exports = {
   /**
@@ -62,14 +68,11 @@ module.exports = {
     // NB: It's important to wrap the provider as a function.
     rinkeby: {
       provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraKey}`),
-      network_id: 4,       // rinkeby's id
-      gas: 4500000,        // rinkeby has a lower block limit than mainnet
-      gasPrice: 10000000000
-      // confirmations: 2,    // # of confs to wait between deployments. (default: 0)
-      // timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
-      // skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
-    },
-
+      network_id: 4 // rinkeby's id
+     // gas: 45000, // rinkeby has a lower block limit than mainnet
+      //gasPrice: 10000000000
+      },
+  
     // Useful for private networks
     // private: {
       // provider: () => new HDWalletProvider(mnemonic, `https://network.io`),

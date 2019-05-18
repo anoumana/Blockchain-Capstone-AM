@@ -1,0 +1,75 @@
+
+Starting migrations...
+======================
+> Network name:    'rinkeby'
+> Network id:      4
+> Block gas limit: 0x7a1200
+
+
+1_initial_migration.js
+======================
+
+   Deploying 'Migrations'
+   ----------------------
+   > transaction hash:    0x328b0fc7c561a2333ea03cd2e81813bd8ae09ba3ed862ec9d8cb2dad2e214257
+   > Blocks: 1            Seconds: 16
+   > contract address:    0x83D01efFF49883373B4deAAc523ADc7A6592aA11
+   > block number:        4401365
+   > block timestamp:     1558149974
+   > account:             0x7AaDE8b14E571C0e24D7E1C2fBEADe5f831a139a
+   > balance:             18.649365581
+   > gas used:            273162
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00546324 ETH
+
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.00546324 ETH
+
+
+2_deploy_contracts.js
+=====================
+
+   Deploying 'AMKaasu'
+   -------------------
+   > transaction hash:    0x0c96638b1be534f9fb85e3ce34015bccdc3b3e2d728602caa60e055ce53089b5
+   > Blocks: 1            Seconds: 12
+   > contract address:    0x1C4C47F305deB95c775971F4D00cD76d90007332
+   > block number:        4401367
+   > block timestamp:     1558150004
+   > account:             0x7AaDE8b14E571C0e24D7E1C2fBEADe5f831a139a
+   > balance:             18.581218981
+   > gas used:            3365302
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.06730604 ETH
+
+
+   Deploying 'SolnSquareVerifier'
+   ------------------------------
+   > transaction hash:    0x065c7d64d604e2a40f1f390f22daf98fea2d3bd24e296fba7c4df44ae565a136
+   > Blocks: 0            Seconds: 8
+   > contract address:    0xBb0D0D4aBbc00bD41961b0A9CFaa0BfEe87092F4
+   > block number:        4401368
+   > block timestamp:     1558150019
+   > account:             0x7AaDE8b14E571C0e24D7E1C2fBEADe5f831a139a
+   > balance:             18.469788081
+   > gas used:            5571545
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.1114309 ETH
+
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.17873694 ETH
+
+
+Summary
+=======
+> Total deployments:   3
+> Final cost:          0.18420018 ETH
