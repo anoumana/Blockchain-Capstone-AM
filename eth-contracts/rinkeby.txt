@@ -5,19 +5,18 @@ Starting migrations...
 > Network id:      4
 > Block gas limit: 0x7a1200
 
-
 1_initial_migration.js
 ======================
 
    Deploying 'Migrations'
    ----------------------
-   > transaction hash:    0x328b0fc7c561a2333ea03cd2e81813bd8ae09ba3ed862ec9d8cb2dad2e214257
-   > Blocks: 1            Seconds: 16
-   > contract address:    0x83D01efFF49883373B4deAAc523ADc7A6592aA11
-   > block number:        4401365
-   > block timestamp:     1558149974
+   > transaction hash:    0x90e8b7bd31a81917beb5409db6907e8b435996bfb08fb316d8720e13757dcafb
+   > Blocks: 0            Seconds: 12
+   > contract address:    0xDA108286066CB2211B09FAc228D0cc01F8351d5d
+   > block number:        4405226
+   > block timestamp:     1558207897
    > account:             0x7AaDE8b14E571C0e24D7E1C2fBEADe5f831a139a
-   > balance:             18.649365581
+   > balance:             18.460330911
    > gas used:            273162
    > gas price:           20 gwei
    > value sent:          0 ETH
@@ -35,41 +34,53 @@ Starting migrations...
 
    Deploying 'AMKaasu'
    -------------------
-   > transaction hash:    0x0c96638b1be534f9fb85e3ce34015bccdc3b3e2d728602caa60e055ce53089b5
-   > Blocks: 1            Seconds: 12
-   > contract address:    0x1C4C47F305deB95c775971F4D00cD76d90007332
-   > block number:        4401367
-   > block timestamp:     1558150004
+   > transaction hash:    0xce6bf4db1b61271c273b911dccf2a0e1d714ef27cec633f848b72c26cf139f3c
+   > Blocks: 0            Seconds: 8
+   > contract address:    0x5D31618bc52DC44150f7054b92c802e292674A49
+   > block number:        4405228
+   > block timestamp:     1558207927
    > account:             0x7AaDE8b14E571C0e24D7E1C2fBEADe5f831a139a
-   > balance:             18.581218981
-   > gas used:            3365302
+   > balance:             18.388939231
+   > gas used:            3527556
    > gas price:           20 gwei
    > value sent:          0 ETH
-   > total cost:          0.06730604 ETH
+   > total cost:          0.07055112 ETH
 
 
    Deploying 'SolnSquareVerifier'
    ------------------------------
-   > transaction hash:    0x065c7d64d604e2a40f1f390f22daf98fea2d3bd24e296fba7c4df44ae565a136
-   > Blocks: 0            Seconds: 8
-   > contract address:    0xBb0D0D4aBbc00bD41961b0A9CFaa0BfEe87092F4
-   > block number:        4401368
-   > block timestamp:     1558150019
+   > transaction hash:    0xae58dc2673c06327f9e2e2bc61bbdcb6efaf69bb302ea131f7924c7bc0256a3d
+   > Blocks: 0            Seconds: 12
+   > contract address:    0x79D7BeDABfF060FDD9Ab2fA66CEf060adcDA74f8
+   > block number:        4405229
+   > block timestamp:     1558207942
    > account:             0x7AaDE8b14E571C0e24D7E1C2fBEADe5f831a139a
-   > balance:             18.469788081
-   > gas used:            5571545
+   > balance:             18.274176931
+   > gas used:            5738115
    > gas price:           20 gwei
    > value sent:          0 ETH
-   > total cost:          0.1114309 ETH
+   > total cost:          0.1147623 ETH
 
 
    > Saving migration to chain.
    > Saving artifacts
    -------------------------------------
-   > Total cost:          0.17873694 ETH
+   > Total cost:          0.18531342 ETH
 
 
 Summary
 =======
 > Total deployments:   3
-> Final cost:          0.18420018 ETH
+> Final cost:          0.19077666 ETH
+
+C:\dev\github\Blockchain-Capstone-AM\eth-contracts>node scripts\mint.js
+Minted creature. Transaction: 0xdf4520c78e1fd4c7911cb4d2751709c48210ad197d20e6d94ef398c0081bfddf
+Minted creature. Transaction: 0x74ccdf8b627334de1ca8ae3e24d8e6fff98d89af07f6d7fe921f71ac586703f5
+Minted creature. Transaction: 0x95e8c254acabe130699ee7bfb69d174d3080840d4f6269ca2f3e3bec127f1185
+Minted creature. Transaction: 0xd40f763c16f07d12c0a514deab8d7bfa8cac1d4633e68681259aa75de4d47519
+Minted creature. Transaction: 0x8ad18ff733e697ee4022be1791227d97ab74cafe58136cc61d0b277fbbb0d558
+Minted creature. Transaction: 0xd3f9dee7750497ce9f56af2c5ebeab346c86dfdf1a0d23b22221fb41e53c21a1
+Minted creature. Transaction: 0xf0b894aa7ca3df06a54ef4a284eed1d13ca718e40c52b0ce5aa4fc3f607ed3fd
+Minted creature. Transaction: 0x7336b5a6b409392276a0080048ed4f961f68887046cfdedce0621f7f4b5257d1
+Minted creature. Transaction: 0x64b7d07e4105260101b86562ec147e27ffb5ce3afb2ae492585818c9c0094907
+Minted creature. Transaction: 0x3e2a953ef3d42f200f00905f4ecdfccb7f6cfd8969709327846a722b6e1c8ee1

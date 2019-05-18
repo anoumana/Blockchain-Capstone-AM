@@ -486,12 +486,16 @@ contract ERC721Enumerable is ERC165, ERC721 {
 contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 
     // TODO: Create private vars for token _name, _symbol, and _baseTokenURI (string)
+    // Token name
     string private _name;
+
+    // Token symbol
     string private _symbol;
+
+    // Optional mapping for token URIs
+    mapping(uint256 => string) private _tokenURIs;
     string private _baseTokenURI;
 
-    //TODO: create private mapping of tokenId's to token uri's called '_tokenURIs'
-    mapping (uint256 => string) _tokenURIs;
 
     bytes4 private constant _INTERFACE_ID_ERC721_METADATA = 0x5b5e139f;
     /*
@@ -507,10 +511,27 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
         _name = name;
         _symbol = symbol;
         _baseTokenURI = baseTokenURI;
-
+       // bytes4 INTERFACE_ID_ERC721_METADATA = bytes4(keccak256(name))^bytes4(keccak256(symbol))^bytes4(keccak256(baseTokenURI));
+    
         _registerInterface(_INTERFACE_ID_ERC721_METADATA);
     }
 
+
+    /**
+     * @dev Gets the token name.
+     * @return string representing the token name
+     */
+    function name() external view returns (string memory) {
+        return _name;
+    }
+
+    /**
+     * @dev Gets the token symbol.
+     * @return string representing the token symbol
+     */
+    function symbol() external view returns (string memory) {
+        return _symbol;
+    }
 
     // TODO: create external getter functions for name, symbol, and baseTokenURI
 
@@ -548,7 +569,7 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 //      -returns a true boolean upon completion of the function
 //      -calls the superclass mint and setTokenURI functions
 
-contract AMKaasu is ERC721Metadata("Kaasu", "KSU", "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/") {
+contract AMKaasu is ERC721Metadata("Dhuttu", "DTU", "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/") {
     address private _contractOwner;
 
     constructor () public   {
