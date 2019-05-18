@@ -4,18 +4,18 @@ var verifier = artifacts.require('Verifier');
 var zProof = {
 	"proof":
 	{
-		"A":["0x06a4b4ae2dbca9ee6a3237ad3fe6e3bf09e026c03ffb98cc487f22c5be2521cf", "0x2fe46cda162d884bf6016e14292201e3e220637e7c501bb3d80ee394e3eb6b53"],
-		"A_p":["0x25694dd92949d1183b04783ca8c0af9795f381ff723511d677e0ed5a3beea87e", "0x0e9c5647d6e55d7683b3c8897bc0d29838e57e59994a6ec282031e18d40a89ed"],
+		"A":["0x0c3edd069a0d651aab1a074c8ab0998cfdf3a283c46f88f23bd14f243273175a", "0x1317c11ab669789f8d1c6fe2c4224a8b5af498e0751c73212c13adb3b90965e7"],
+		"A_p":["0x1c456c1f80a74d97ba1bd0d6c350663f4d558a98bfe0f5173d311efec73f5cb9", "0x06d2b8e7398038e28d172d4bfdcc910393786f94f19d0442633ab2ea50355af7"],
 		"B":
-			[["0x2c553c0a87ca6b2bf0fbaa805e83149e1300c1602bdadb2d7149bbc3b122458e", "0x2898cd32f0c71cb4ec3efc4e35595a05b5aa2617344fcfa66b679299ddc19228"], ["0x026bb7e3e761b01c5a785d0315109244aeeabe6807200f09ac07ed96ceb8a30f", "0x028e23f254f606025ef7020ca1b0bfc77b9cb193071a02191234d2b9f1242314"]],
+			[["0x22cd7fb323aa3fa2002a6c24f5a401503fe373418c0e1d0d9da7705b7afa1260", "0x208922a0b96445a5fe4a58c2af4dbba18c1bd9bea3c137d7c1b4a9a7a8baaf95"], ["0x019d48c8dc349cbe4b495e255d7bb98bccc740f630ac1a3d2019f09e9d433b4f", "0x167669b6d53c389e9bce4bb55fc67c610fe5dd56f51e6f00ab0ea29d7344f24c"]],
 		
-		"B_p":["0x2b3b92e6ee68af6184f12d499421486171ffc49d9fab566e77fcbf5ad653cc7b", "0x272040fa3fdd256390ba22e0d3d5676212f2667b1263c7babd25185ed086c477"],
-		"C":["0x0e9f5d7a41453c835e2d89944e648a36e9486aa8c80744803c68a239bf4087e1", "0x00d909fe4474786469c50aed877f5f97bb224ee68c5373ad0b1dd4d0a646eb97"],
-		"C_p":["0x12393719896b8547316a9f3710099a722311835ca8d3b1bcadf43d4994b8ad6a", "0x14f102599a1b655b854d5115a605de2801ed5eb02ccab9b47ecc88d3fd91d7dd"],
-		"H":["0x1ffa8a6135e03e4cc7f9c82a83e7d2cbc862f7531a459e9807f2995548c291b2", "0x224bd52e60ed94c6b4a9d237ca942a6adf8e52276dd44d4ca9f52ef4dc95abe3"],
-		"K":["0x2ea8b8532136b2ffb28f24e32a8a4e8785dfc3f40ac71678a12d341a1f1b39aa", "0x20e556033eb657253a16cb69a697e1a6f979606b1d02257127d21ad70e7da147"]
+		"B_p":["0x04a14c7465a695ea58046809f7f69916365c449a0b28dd901cde00617f63e53b", "0x07a927fe956cffe7fb209ed880751819f4a81e8f20628f4fc8f7aceef5706877"],
+		"C":["0x0622e349dbaa804583ea846dbd4e0491551f51bc43a5df84ff057a9c4c0cb2aa", "0x01577881b1d3a750e7874f4df1627a872586ca01b1dd24ed08581bc0523dc6bb"],
+		"C_p":["0x21b916e3224404db5deedc96ff515f1f5f5e83bb7c62880990f0532106c8e437", "0x024b9e04984ccbcfefca77174e7b008c4ac4cfa826397d86bf825649d6e8be9e"],
+		"H":["0x25a031742199163b4d214a4ace7a62713b1b48d1b203c9f7fe8ed22a7d3cb25b", "0x0bdb1cb68a1f7a5c20c1ad9b8df8e89647a809461b28bda96649bd8475f93b64"],
+		"K":["0x1fd3db5e6843705320a2e21047bcc98a0ba81a68a2a1f630572f656a85ec8a77", "0x2ca172c2c0f7bc8924fc367f7e74386d40ff2bf088803f773ed12e1ccd265003"]
 	},
-	"input":[3,9]
+	"input":[9,1]
 };
 
 //Verifier.at(<verifier contract address>).verifyTx(A, A_p, B, B_p, C, C_p, H, K, [...publicInputs, ...outputs])
@@ -31,17 +31,32 @@ contract('TestVerifier', accounts => {
         })
 
         it('should pass Test verification with correct proof', async function () {
-            let result = await this.contract.verifyTx(zProof.proof.A, zProof.proof.A_p, zProof.proof.B, zProof.proof.B_p,zProof.proof.C, zProof.proof.C_p, zProof.proof.H, zProof.proof.K, zProof.proof.input);
+            let result = await this.contract.verifyTx.call(zProof.proof.A, zProof.proof.A_p, zProof.proof.B, 
+                zProof.proof.B_p,zProof.proof.C, zProof.proof.C_p, zProof.proof.H, zProof.proof.K, zProof.input);
+            console.log("Correct proof input result :" + result);
             assert.equal(result,true,"Expected Verify Response was true!");
         })
 
         it('should fail Test verification with incorrect proof', async function () {
-            let result = await this.contract.verifyTx(zProof.proof.A, zProof.proof.A_p, zProof.proof.B, zProof.proof.B_p,zProof.proof.C, zProof.proof.C_p, zProof.proof.H, zProof.proof.K, zProof.proof.input);
+            var wrongInput = [6,8];
+            let result = await this.contract.verifyTx.call(zProof.proof.A, zProof.proof.A_p, zProof.proof.B, 
+                zProof.proof.B_p,zProof.proof.C, zProof.proof.C_p, zProof.proof.H, zProof.proof.K, wrongInput);
+            console.log("Wrong proof input result :" + result);
             assert.equal(result,false,"Expected Verify Response was true!");
         })
 
     })
 });
+
+// 4. Type ls to make sure that nothing is there except square.code
+// 5. ~/zokrates compile -i square.code
+// 6. ~/zokrates setup --proving-scheme pghr13
+// 7. ~/zokrates compute-witness -a 3 9
+// 8. ~/zokrates generate-proof --proving-scheme pghr13
+// 9. ~/zokrates export-verifier --proving-scheme pghr13
+// 10. exit the vm
+// 11. remove the preceeding zeros in the input array of proof.json
+// 12. Delete the existing Verifier.sol in eth-contracts/contracts and replace it with the newly generated Verifier.sol under zokrates/code/square
 
 // Test verification with correct proof
 // - use the contents from proof.json generated from zokrates steps
